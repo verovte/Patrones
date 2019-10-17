@@ -1,22 +1,24 @@
 package bank;
-/**
- *
+/*
  * @author verovte
  */
 public class Cuenta{
 
         /* ... */
 
-        public double comprobarSaldoDisponible(){}
+    public double comprobarSaldoDisponible(){return 0;}
 
-        public boolean bloquearCuenta(){}
+    public boolean bloquearCuenta(){return false;}
 
-        public boolean desbloquearCuenta{}
+    public void retirarSaldo(int cantidad){}
 
-        public void retirarSaldo(int cantidad){}
+    public boolean actualizarCuenta(){return false;
+}
 
-        public boolean actualizarCuenta(){}
+    public void alFallar(){}
 
-        public void alFallar(){}
+    void desbloquearCuenta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

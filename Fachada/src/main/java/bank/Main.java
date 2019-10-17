@@ -9,8 +9,6 @@ public class Main {
 
         FachadaCajero cajero_automatico = new FachadaCajero();
 
-
-
         cajero_automatico.introducirCredenciales();
 
         cajero_automatico.sacarDinero();

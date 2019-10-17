@@ -5,79 +5,64 @@ package bank;
  */
 public class FachadaCajero{
 
-        private Autentificacion autentificacion = new Autentificacion();
+    private Autentificacion autentificacion = new Autentificacion();
 
-        private Cajero cajero = new Cajero();
+    private Cajero cajero = new Cajero();
 
-        private Cuenta cuenta = null;
+    private Cuenta cuenta = null;
 
+    public void introducirCredenciales(){
 
-
-        public void introducirCredenciales(){
-
-                boolean tarjeta_correcta = autentificacion.leerTarjeta(); 
-
-                if(tarjeta_correcta){
-
-                        String clave = autentificacion.introducirClave();
-
-                        boolean clave_correcta = autentificacion.comprobarClave(clave);
-
-                        if(clave_correcta){
-
-                                cuenta = autentificacion.obtenerCuenta();
-
-                                return;
-
-                        }
-
-                }
-
-                autentificacion.alFallar();
-
+        boolean tarjeta_correcta = autentificacion.leerTarjeta(); 
+        
+        if(tarjeta_correcta){
+            String clave = autentificacion.introducirClave();
+            boolean clave_correcta = autentificacion.comprobarClave(clave);
+            if(clave_correcta){
+                cuenta = autentificacion.obtenerCuenta();
+                return;
+            }
         }
+        
+        autentificacion.alFallar();
+        
+    }
 
+    public void sacarDinero(){
 
+        if(cuenta != null){
 
-        public void sacarDinero(){
+            int cantidad = cajero.introducirCantidad();
 
-                if(cuenta != null){
+            boolean tiene_dinero = cajero.tieneSaldo(cantidad);
 
-                        int cantidad = cajero.introducirCantidad();
+            if(tiene_dinero){
 
-                        int tiene_dinero = cajero.tieneSaldo(cantidad);
+                boolean hay_saldo_suficiente = ((int)cuenta.comprobarSaldoDisponible()) >= cantidad;
 
-                        if(tiene_dinero){
+                if(hay_saldo_suficiente){
 
-                                boolean hay_saldo_suficiente = ((int)cuenta.comprobarSaldoDisponible()) >= cantidad;
+                    cuenta.bloquearCuenta();
 
-                                if(hay_saldo_suficiente){
+                    cuenta.retirarSaldo(cantidad);
 
-                                        cuenta.bloquearCuenta();
+                    cuenta.actualizarCuenta();
 
-                                        cuenta.retirarSaldo(cantidad);
+                    cuenta.desbloquearCuenta();
 
-                                        cuenta.actualizarCuenta();
+                    cajero.expedirDinero();
 
-                                        cuenta.desbloquearCuenta();
+                    cajero.imprimirTicket();
 
+                } else{
 
+                    cuenta.alFallar();
 
-                                        cajero.expedirDinero();
-
-                                        cajero.imprimirTicket();
-
-                                }
-
-                                else{
-
-                                        cuenta.alFallar();
-
-                                }
-
-                        }
+                  }
 
                 }
+
+            }
 
         }
 

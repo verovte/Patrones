@@ -1,29 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bank;
-
-/**
- *
+/*
  * @author verovte
  */
 public class Autentificacion{
 
         /* ... */
 
-        public boolean leerTarjeta(){return false;
-}
+    public boolean leerTarjeta(){return true;}
 
-        public String introducirClave(){return null;
-}
+    public String introducirClave(){return null;}
 
-        public boolean comprobarClave(String clave){return false;
-}
+    public boolean comprobarClave(String clave){return false;}
 
-        public Cuenta obtenerCuenta(){}
+    public Cuenta obtenerCuenta(){return null;}
 
-        public void alFallar(){}
+    public void alFallar(){}
 
 }
