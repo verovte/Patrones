@@ -1,19 +1,41 @@
 package bank;
+
+import java.io.IOException;
+import utilidad.Input;
+
 /*
  * @author verovte
  */
 public class Cajero{
 
         /* ... */
+    Input i = new Input();
 
-    public int introducirCantidad(){return 0;}
+    public int introducirCantidad() throws IOException{
+        int cantidad;
+        System.out.println("INTRODUZCA CANTIDAD A RETIRAR");
+        cantidad = i.tryIntegerPositivo();
+        return cantidad;
+    }
 
-    public boolean tieneSaldo(int cantidad){return false;}
+    public boolean tieneSaldo(int cantidad){
+        if(cantidad>1000){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
-    public String imprimirTicket(){return null;}
+    public String imprimirTicket(double saldo){
+        return "SALDO RESTANTE: "+saldo;
+    }
 
     void expedirDinero() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("POR FAVOR RETIRELO DEL CAJERO");
+    }
+    
+    public void alFallar(){
+        System.out.println("SALDO NO DISPONIBLE EN ESTE CAJERO, POR FAVOR BUSQUE OTRO");
     }
 
 }

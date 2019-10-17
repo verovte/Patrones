@@ -1,4 +1,7 @@
 package bank;
+
+import java.io.IOException;
+
 /**
  *
  * @author verovte
@@ -11,7 +14,7 @@ public class FachadaCajero{
 
     private Cuenta cuenta = null;
 
-    public void introducirCredenciales(){
+    public void introducirCredenciales() throws IOException{
 
         boolean tarjeta_correcta = autentificacion.leerTarjeta(); 
         
@@ -28,7 +31,7 @@ public class FachadaCajero{
         
     }
 
-    public void sacarDinero(){
+    public void sacarDinero() throws IOException{
 
         if(cuenta != null){
 
@@ -42,17 +45,13 @@ public class FachadaCajero{
 
                 if(hay_saldo_suficiente){
 
-                    cuenta.bloquearCuenta();
-
                     cuenta.retirarSaldo(cantidad);
 
-                    cuenta.actualizarCuenta();
-
-                    cuenta.desbloquearCuenta();
+                    cuenta.actualizarCuenta(cantidad);
 
                     cajero.expedirDinero();
 
-                    cajero.imprimirTicket();
+                    System.out.println(cajero.imprimirTicket(cuenta.saldo));
 
                 } else{
 
@@ -60,6 +59,8 @@ public class FachadaCajero{
 
                   }
 
+                }else {
+                	cajero.alFallar();
                 }
 
             }
